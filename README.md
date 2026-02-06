@@ -71,6 +71,43 @@ Difficulté : Facile (~30 minutes)
 ---------------------------------------------------
 **Complétez et documentez ce fichier README.md** pour nous expliquer comment utiliser votre solution.  
 Faites preuve de pédagogie et soyez clair dans vos expliquations et processus de travail.  
+
+### Solution Implémentée
+
+Cette solution automatise entièrement le déploiement de l'architecture serverless sur LocalStack via un **Makefile** et des scripts Python (`boto3`).
+
+#### 1. Automatisation
+Le projet contient un `Makefile` à la racine qui orchestre tout :
+*   `make install` : Installe les dépendances Python (`boto3`).
+*   `make deploy` : Exécute le script `infrastructure/deploy.py` qui provisionne l'infrastructure.
+*   **`make`** : Commande unique pour tout installer et déployer.
+
+#### 2. Architecture Déployée
+Le script de déploiement effectue les actions suivantes sur LocalStack :
+1.  **EC2** : Lance une instance t2.micro (AMI factice).
+2.  **Lambda** : Déploie une fonction Python (`infrastructure/lambda_function.py`) qui interface les appels API avec le SDK boto3 pour piloter l'EC2.
+3.  **API Gateway** : Crée une API REST publique avec 3 routes (`/start`, `/stop`, `/status`) reliées à la Lambda.
+
+#### 3. Utilisation
+Pour déployer l'environnement, exécutez simplement dans le terminal :
+```bash
+make
+```
+
+À la fin de l'exécution, le script affichera **3 URLs publiques**. Ces URLs sont accessibles depuis n'importe où (pas de localhost) grâce au port forwarding de GitHub Codespaces.
+
+Exemple de résultat :
+```text
+https://Votre-Space-Name-4566.app.github.dev/restapis/1234abcd/prod/_user_request_/start
+https://Votre-Space-Name-4566.app.github.dev/restapis/1234abcd/prod/_user_request_/stop
+https://Votre-Space-Name-4566.app.github.dev/restapis/1234abcd/prod/_user_request_/status
+```
+
+#### 4. Architecture des fichiers
+*   `Makefile` : Point d'entrée pour l'automatisation.
+*   `infrastructure/deploy.py` : Script "Infrastructure as Code" utilisant Boto3.
+*   `infrastructure/lambda_function.py` : Code de la fonction Serverless.
+*   `rep_localstack/` : Environnement virtuel Python.
    
 ---------------------------------------------------
 Evaluation
