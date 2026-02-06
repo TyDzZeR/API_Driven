@@ -20,6 +20,8 @@ install:
 start:
 	@echo "Demarrage de LocalStack..."
 	$(LOCALSTACK) start -d
+	@echo "Attente que LocalStack soit pret (timeout 60s)..."
+	$(LOCALSTACK) wait -t 60
 	@echo "Verification des services..."
 	$(LOCALSTACK) status services
 
