@@ -78,9 +78,10 @@ Cette solution automatise entièrement le déploiement de l'architecture serverl
 
 #### 1. Automatisation
 Le projet contient un `Makefile` à la racine qui orchestre tout :
-*   `make install` : Installe les dépendances Python (`boto3`).
+*   `make install` : Crée l'environnement virtuel et installe LocalStack ainsi que les dépendances Python (`boto3`).
+*   `make start` : Démarre le service LocalStack en arrière-plan et vérifie son statut.
 *   `make deploy` : Exécute le script `infrastructure/deploy.py` qui provisionne l'infrastructure.
-*   **`make`** : Commande unique pour tout installer et déployer.
+*   **`make`** : Commande unique pour installer, démarrer et déployer.
 
 #### 2. Architecture Déployée
 Le script de déploiement effectue les actions suivantes sur LocalStack :
