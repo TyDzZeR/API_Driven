@@ -1,0 +1,9 @@
+{
+    "name": "API Driven",
+    "portsAttributes": {
+        "4566": {
+            "label": "LocalStack",
+            "visibility": "public"
+        }
+    }
+}

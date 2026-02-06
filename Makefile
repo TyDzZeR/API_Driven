@@ -22,6 +22,8 @@ start:
 	$(LOCALSTACK) start -d
 	@echo "Attente que LocalStack soit pret (timeout 60s)..."
 	$(LOCALSTACK) wait -t 60
+	@echo "Configuration du port 4566 en public..."
+	-gh codespace ports visibility 4566:public -c $${CODESPACE_NAME}
 	@echo "Verification des services..."
 	$(LOCALSTACK) status services
 
